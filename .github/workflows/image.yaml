@@ -47,7 +47,7 @@ jobs:
         uses: nv-gha-runners/setup-artifactory-go-proxy@main
       - name: Build image
         env:
-          IMAGE_NAME: ghcr.io/nvidia/k8s-device-plugin
+          IMAGE_NAME: ghcr.io/xnilsit/k8s-device-plugin
           VERSION: ${{ inputs.version }}-${{ matrix.arch }}
           PUSH_ON_BUILD: true
           GOPROXY: ${{ steps.setup-go-proxy.outputs.goproxy-url }}
@@ -70,10 +70,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Manifest
         env:
-          MULTIARCH_IMAGE: ghcr.io/nvidia/k8s-device-plugin:${{ inputs.version }}
+          MULTIARCH_IMAGE: ghcr.io/xnilsit/k8s-device-plugin:${{ inputs.version }}
         run: |
           docker manifest create \
             ${MULTIARCH_IMAGE} \
-            ghcr.io/nvidia/k8s-device-plugin:${{ inputs.version }}-amd64 \
-            ghcr.io/nvidia/k8s-device-plugin:${{ inputs.version }}-arm64
+            ghcr.io/xnilsit/k8s-device-plugin:${{ inputs.version }}-amd64 \
+            ghcr.io/xnilsit/k8s-device-plugin:${{ inputs.version }}-arm64
           docker manifest push ${MULTIARCH_IMAGE}
