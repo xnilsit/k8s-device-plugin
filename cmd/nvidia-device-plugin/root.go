@@ -20,6 +20,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+
+	"k8s.io/klog/v2"
 )
 
 type root string
@@ -66,7 +68,7 @@ func (r root) tryResolveLibrary(libraryName string) string {
 		l := r.join(d, libraryName)
 		resolved, err := resolveLink(l)
 		if err != nil {
-			fmt.Printf("Couldn't resolve %v, trying next.", l)
+			klog.Warningf("Couldn't resolve %v, trying next.", l)
 			continue
 		}
 		return resolved
