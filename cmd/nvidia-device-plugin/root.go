@@ -55,6 +55,7 @@ func (r root) tryResolveLibrary(libraryName string) string {
 	librarySearchPaths := []string{
 		"/usr/lib64",
 		"/usr/lib/x86_64-linux-gnu",
+		"/usr/lib/x86_64-linux-gnu/nvidia/current",
 		"/usr/lib/aarch64-linux-gnu",
 		"/lib64",
 		"/lib/x86_64-linux-gnu",
