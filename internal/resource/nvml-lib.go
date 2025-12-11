@@ -19,6 +19,7 @@ package resource
 import (
 	"github.com/NVIDIA/go-nvlib/pkg/nvlib/device"
 	"github.com/NVIDIA/go-nvml/pkg/nvml"
+	"k8s.io/klog/v2"
 )
 
 type nvmlLib struct {
@@ -79,6 +80,7 @@ func (l nvmlLib) GetDriverVersion() (string, error) {
 func (l nvmlLib) Init() error {
 	ret := l.Interface.Init()
 	if ret != nvml.SUCCESS {
+		klog.Error(ret)
 		return ret
 	}
 	return nil

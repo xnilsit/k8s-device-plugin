@@ -34,7 +34,7 @@ var errMPSSharingNotSupported = errors.New("MPS sharing is not supported")
 
 // NewDeviceLabeler creates a new labeler for the specified resource manager.
 func NewDeviceLabeler(manager resource.Manager, config *spec.Config) (Labeler, error) {
-	klog.Info(manager)
+	klog.Info(manager.GetDriverVersion())
 	if err := manager.Init(); err != nil {
 		return nil, fmt.Errorf("failed to initialize resource manager: %v", err)
 	}
