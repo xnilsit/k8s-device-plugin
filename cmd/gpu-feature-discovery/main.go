@@ -179,7 +179,7 @@ func start(c *cli.Context, cfg *Config) error {
 		}
 		klog.Infof("\nRunning with config:\n%v", string(configJSON))
 
-		nvmllib := nvml.New()
+		nvmllib := nvml.New(nvml.WithLibraryPath("/driver-root/usr/lib/x86_64-linux-gnu/nvidia/current/libnvidia-ml.so.1"))
 		devicelib := device.New(nvmllib)
 		infolib := nvinfo.New(
 			nvinfo.WithNvmlLib(nvmllib),
