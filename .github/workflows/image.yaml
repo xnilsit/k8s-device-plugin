@@ -72,5 +72,4 @@ jobs:
           docker manifest create \
             ${MULTIARCH_IMAGE} \
             ghcr.io/xnilsit/k8s-device-plugin:${{ inputs.version }}-amd64 \
-            ghcr.io/xnilsit/k8s-device-plugin:${{ inputs.version }}-arm64
           docker manifest push ${MULTIARCH_IMAGE}

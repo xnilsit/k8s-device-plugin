@@ -253,19 +253,20 @@ func (d *gfd) run(sigs chan os.Signal) (bool, error) {
 			klog.Warningf("Error removing output file: %v", err)
 		}
 	}()
-
+	klog.Info("NewTimestampLabeler")
 	timestampLabeler := lm.NewTimestampLabeler(d.config)
 rerun:
+	klog.Info("NewLabelers")
 	loopLabelers, err := lm.NewLabelers(d.manager, d.vgpu, d.config)
 	if err != nil {
 		return false, err
 	}
-
+	klog.Info("Merge")
 	labelers := lm.Merge(
 		timestampLabeler,
 		loopLabelers,
 	)
-
+	klog.Info("Labels")
 	labels, err := labelers.Labels()
 	if err != nil {
 		return false, fmt.Errorf("error generating labels: %v", err)
