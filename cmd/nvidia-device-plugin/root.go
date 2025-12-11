@@ -66,6 +66,7 @@ func (r root) tryResolveLibrary(libraryName string) string {
 		l := r.join(d, libraryName)
 		resolved, err := resolveLink(l)
 		if err != nil {
+			fmt.Printf("Couldn't resolve %v, trying next.", l)
 			continue
 		}
 		return resolved
