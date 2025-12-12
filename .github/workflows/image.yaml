@@ -52,24 +52,3 @@ jobs:
         run: |
           echo "${VERSION}"
           make -f deployments/container/Makefile build
-
-  create-manifest:
-    needs: [ build ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-        name: Check out code
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build Manifest
-        env:
-          MULTIARCH_IMAGE: ghcr.io/xnilsit/k8s-device-plugin:${{ inputs.version }}
-        run: |
-          docker manifest create \
-            ${MULTIARCH_IMAGE} \
-            ghcr.io/xnilsit/k8s-device-plugin:${{ inputs.version }}-amd64 \
-          docker manifest push ${MULTIARCH_IMAGE}

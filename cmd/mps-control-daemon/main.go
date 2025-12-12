@@ -170,7 +170,7 @@ func startDaemons(c *cli.Context, cfg *Config) ([]*mps.Daemon, bool, error) {
 	}
 	spec.DisableResourceNamingInConfig(config)
 
-	nvmllib := nvml.New()
+	nvmllib := nvml.New(nvml.WithLibraryPath("/driver-root/usr/lib/x86_64-linux-gnu/nvidia/current/libnvidia-ml.so.1"))
 	devicelib := device.New(nvmllib)
 	infolib := nvinfo.New(
 		nvinfo.WithNvmlLib(nvmllib),
